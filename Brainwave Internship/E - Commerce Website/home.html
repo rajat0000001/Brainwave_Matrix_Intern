@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"></link>
+    <title>Maal-Dar | Home</title>
+</head>
+<body>
+    <header>
+        <div class="logo">E-Comm. Site</div>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="login.html">Account</a>
+            <a href="cart.html">Cart</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search products...">
+        </div>
+        <h3>Categories</h3>
+        <div class="categories">
+            
+            <button onclick="filterCategory('el')">Electronics</button>
+            <button onclick="filterCategory('cl')">Clothing</button>
+            <button onclick="filterCategory('acce')">Accessories</button>
+        </div>
+        <hr>
+        <h3>Products</h3>
+        <div class="products" id="products">
+            <!-- Dynamic products will be inserted here -->
+        </div>
+    </div>
+    <hr>
+    <footer>
+        <h4>Our Services</h4>
+        <div class="ser">
+            <img src="247.png"> <img src="fast.png">
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    min-height: 75px;
+    background: linear-gradient(135deg,#83db89,#630c0c);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+header nav {
+    display: flex;
+    gap: 1rem;
+}
+header nav a {
+    color: white;
+    text-decoration: none;
+}
+header nav a:hover{
+    color: #c0c0c0;
+}
+.container {
+    
+    font-size: x-large;
+    min-height: 15vh;
+    min-width: 25vh;
+    background: linear-gradient(120deg,#83db89,#630c0c);
+    border-radius: 8%;
+    margin-top: 18vh;
+    justify-self: center;
+    display: block;
+    padding: 2rem;
+}
+.containe{
+    font-size: x-large;
+    min-height: 15vh;
+    min-width: 25vh;
+    background: linear-gradient(120deg,#83db89,#630c0c);
+    border-radius: 8%;
+    margin-top: 4vh;
+    justify-self: center;
+    display: block;
+    padding: 2rem;
+}
+
+.container button{
+    justify-self: center;
+    border-radius: 8px;
+    align-self: center;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    padding: 16px 50px;
+    cursor: pointer;
+}
+.container input{
+    padding-right: 0px;
+    width: 100%;
+    font-size: x-large;
+    margin-bottom: 8%;
+}
+.containe button{
+    justify-self: center;
+    border-radius: 8px;
+    align-self: center;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    padding: 16px 50px;
+    cursor: pointer;
+}
+.containe input{
+    width: 100%;
+    padding-right: 0px;
+    font-size: x-large;
+    margin-bottom: 8%;
+}
+

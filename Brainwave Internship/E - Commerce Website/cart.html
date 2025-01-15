@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maal-Dar | Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            min-height: 75px;
+        background: linear-gradient(135deg,#83db89,#630c0c);
+        color: white;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        header nav {
+            display: flex;
+            gap: 1rem;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+        }
+        header nav a:hover{
+            color: #c0c0c0;
+        }
+        .container {
+            padding: 2rem;
+        }
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+            background-color: rgb(154, 154, 154);
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        .b{
+            display: flex;
+            justify-self: center;
+        }
+        .b button{
+            border-radius: 8px;
+            text-align: center;
+            min-width: 20vh;
+            min-height: 10vh;
+            background-color: #c0c0c0;
+        }
+        .b button:hover{
+            background-color: white;
+        }
+        .cart-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 2px;
+            margin-bottom: 1rem;
+        }
+        .cart-item-info {
+            flex: 1;
+            margin-left:10px;
+        }
+        .cart-item-info h4 {
+            margin: 0;
+        }
+        .cart-item-info p {
+            margin: 0;
+            color: #666;
+        }
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+        }
+        .cart-item-controls button {
+            border: none;
+            border-radius: 2px;
+            background-color: #333;
+            color: white;
+            padding: 0.3rem 0.6rem;
+            margin: 0 0.5rem;
+            align-items: center;
+            cursor: pointer;
+        }
+        .cart-item-controls button:hover {
+            background-color: #555;
+        }
+        .cart-total {
+            text-align: right;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">E-Comm. Site</div>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="login.html">Account</a>
+            <a href="cart.html">Cart</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Your Cart</h1>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be dynamically injected here -->
+        </div>
+        <div class="cart-total" id="cart-total">Total: $0</div>
+        <div class="b">
+        <button type="submit" onclick="Buy()">BUY</button></div>
+    </div>
+    <script>
+        let t;
+        function loadCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            
+
+            cart.forEach(item => {
+                total += parseFloat(item.price.replace('₹', '')) * item.quantity;
+
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>Price: ${item.price}</p>
+                            <p>Quantity: ${item.quantity}</p>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <button onclick="removeItem(${item.id})">Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+            t=total;
+
+            cartTotalElement.textContent = `Total: ₹${total.toFixed(2)}`;
+        }
+
+        function updateQuantity(id, delta) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemIndex = cart.findIndex(item => item.id === id);
+
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity += delta;
+
+                if (cart[itemIndex].quantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                loadCart();
+            }
+        }
+        function Buy(){
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                alert('Your cart is empty. Add some items to proceed!');
+                return;
+            }
+
+            alert(`Pay ammount: ₹${t}. Thank you for your purchase!`);
+            localStorage.removeItem('cart');
+            loadCart();
+        }
+
+        function removeItem(id) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.id !== id);
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        loadCart();
+    </script>
+</body>
+</html>
